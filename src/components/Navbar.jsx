@@ -9,7 +9,7 @@ const Navbar = () => {
     const activeLinkStyle = ({ isActive }) => {
         return {
             color: isActive ? colorPalette.brand.primary : 'black',
-            borderBottom: isActive ? `2px solid ${colorPalette.brand.primary}` : 'none',  // ← Use borderBottom
+            borderBottom: isActive ? `2px solid ${colorPalette.brand.primary}` : 'none', 
           
             textDecoration: 'none'
         }
@@ -17,7 +17,7 @@ const Navbar = () => {
     
     return(
         <div className='flex flex-row gap-4'>
-            <NavLink style={activeLinkStyle} to='/'>Home</NavLink>  {/* ← Change to NavLink */}
+            <NavLink style={activeLinkStyle} to='/'>Home</NavLink>  
             <NavLink style={activeLinkStyle} to='/product'>Product</NavLink>
             <NavLink style={activeLinkStyle} to='/about'>About</NavLink>
         </div>
