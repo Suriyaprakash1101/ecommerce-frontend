@@ -11,6 +11,7 @@ import AppProvider from './components/AppContext'
 import ShowProduct from './components/ShowProduct'
 import About from './components/About'
 import SignUp from './components/SignUp'
+import Login from './components/Login'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='/product' element={<ShowProduct/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/login' element={<Login/>}/>
         </Routes>
       </BrowserRouter>
       

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useApp } from './AppContext';
+import { NavLink } from 'react-router-dom';
 
 const SignUp = () => {
     const [profileData, setProfileData] = useState({
@@ -83,7 +84,7 @@ const SignUp = () => {
                         <input type="text" placeholder='Coastal Cave 42, Blue Langoon Reef' className='border-2 border-gray-400 w-3/4 p-1 rounded-md'  onChange={(e)=>{handleChange(e,'address')}}/>
                     </div>
                     <button type='submit' className='m-3 p-2 font-semibold rounded-md hover:cursor-pointer' style={{ background: color.cta, color: color.text.primary }}>SIGN UP</button>
-                    <p className='text-center'>Already have an account? <span className='font-semibold' style={{ color: color.text.header }}>Login</span></p>
+                    <p className='text-center'>Already have an account? <NavLink className='font-semibold' to='/login'  style={{ color: color.text.header }}>Login</NavLink></p>
                 </div>
             </form>
         </div>
