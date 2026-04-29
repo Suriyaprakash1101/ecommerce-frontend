@@ -4,6 +4,7 @@ import { useApp } from './AppContext'
 import { RiUserLine } from '@remixicon/react'
 import { Link, Links } from 'react-router-dom'
 import SignUp from './SignUp'
+import {RiSearchLine} from '@remixicon/react'
 
 const Header = () => {
     const context = useApp();
@@ -24,8 +25,11 @@ const Header = () => {
             
            
             <div className='flex flex-row gap-4 items-center'>
+                <div className='flex flex-row gap-2 border-2 border-gray-200 pl-2 pt-1.5 pb-1.5 rounded-md focus:outline-none focus:border-brand-primary outline-0'>
+                    <label htmlFor="searchOption" className='text-gray-400'>< RiSearchLine  /></label>
                 <input 
-                    className='border-2 border-gray-200 pl-2 pt-1.5 pb-1.5 rounded-md focus:outline-none focus:border-brand-primary'
+                    id='searchOption'
+                    className='outline-0'
                     style={{ 
                         borderColor: color.accent,
                         width: '200px'
@@ -33,6 +37,8 @@ const Header = () => {
                     type="text" 
                     placeholder='Search treasures...' 
                 />
+                </div>
+                
                 
                 {!isLoggedIn ? (
                     <div className='flex flex-row gap-2'>
