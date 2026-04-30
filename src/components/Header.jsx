@@ -42,12 +42,13 @@ const Header = () => {
                 
                 {!isLoggedIn ? (
                     <div className='flex flex-row gap-2'>
-                        <button 
+                        <Link 
                             className='px-3 py-1 rounded-md hover:opacity-80 transition'
                             style={{ color: color.text.secondary }}
+                            to='/login'
                         >
                             Login
-                        </button>
+                        </Link>
                         <Link 
                             className='px-3 py-1 rounded-md transition hover:opacity-90'
                             style={{ 
