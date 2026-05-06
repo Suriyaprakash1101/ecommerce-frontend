@@ -4,13 +4,22 @@ import { useApp } from './AppContext'
 import { RiUserLine } from '@remixicon/react'
 import { Link, Links } from 'react-router-dom'
 import SignUp from './SignUp'
-import {RiSearchLine} from '@remixicon/react'
+import {RiSearchLine,RiLogoutCircleRLine} from '@remixicon/react'
 
 const Header = () => {
     const context = useApp();
     const color = context.colorPalette;
     const isLoggedIn = context.isLoggedIn;
-    
+    const setIsLoggedIn = context.setIsLoggedIn;
+    const handleLogout = ()=>
+    {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user_email');
+        localStorage.removeItem('token_type');
+        setIsLoggedIn(false);
+
+        
+    }
     
 
     return (
@@ -69,7 +78,13 @@ const Header = () => {
                             className='cursor-pointer hover:opacity-80'
                             size={24}
                         />
+                        <div onClick={handleLogout}>
+                            <RiLogoutCircleRLine style={{ color: color.brand.primary }}
+                            className='cursor-pointer hover:opacity-80'
+                            size={24}   />
+                        </div>
                     </div>
+                   
                 )}
             </div>
         </div>

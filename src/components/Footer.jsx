@@ -6,7 +6,7 @@ const Footer = ()=>{
     const context = useApp();
     const colorPalette = context.colorPalette;
 
-    return <div className='flex flex-row flex-wrap justify-between pl-4 pr-4 pb-4' style={{background:colorPalette.background.secondary}}>
+    return <div className='flex flex-row flex-wrap justify-between pl-4 pr-4 pb-4 pt-4' style={{background:colorPalette.background.secondary}}>
             <div className='flex flex-col gap-2'>
                 <h1 className='font-bold'>AQUA</h1>
                 <p className='max-w-sm'>Elevating the everyday through a curated collections of 

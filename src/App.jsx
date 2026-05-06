@@ -13,27 +13,30 @@ import About from './components/About'
 import SignUp from './components/SignUp'
 import Login from './components/Login'
 import AdminDashboard from './components/AdminDashboard'
+import { useAutoLogout } from './hook/useAutoLogout'
 
+function AppRoutes() {
+  useAutoLogout(); 
+  
+  return (
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/product' element={<ShowProduct/>}/>
+      <Route path='/about' element={<About/>}/>
+      <Route path='/signup' element={<SignUp/>}/>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/adminDashboard' element={<AdminDashboard/>}/>
+    </Routes>
+  );
+}
 
 function App() {
- 
-
   return (
     <AppProvider>
       <div className=''>
-        
-      <BrowserRouter>
-      
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/product' element={<ShowProduct/>}/>
-          <Route path='/about' element={<About/>}/>
-          <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/adminDashboard' element={<AdminDashboard/>}/>
-        </Routes>
-      </BrowserRouter>
-      
+        <BrowserRouter>
+          <AppRoutes /> 
+        </BrowserRouter>
       </div>
     </AppProvider>
   )

@@ -3,7 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 
 const About = () => {
-    // Features data for the ecommerce platform
+    
     const features = [
         {
             title: "Curated Collection",
@@ -27,7 +27,7 @@ const About = () => {
         }
     ];
 
-    // Team/values data
+    
     const values = [
         "Sustainable sourcing practices",
         "Ethical manufacturing standards",
@@ -44,7 +44,6 @@ const About = () => {
             >
                 <div className="max-w-7xl mx-auto">
 
-                    {/* Hero Section */}
                     <div className="text-center mb-16">
                         <h1
                             className="text-4xl md:text-5xl font-bold mb-4 tracking-tight"
@@ -63,7 +62,6 @@ const About = () => {
                         </p>
                     </div>
 
-                    {/* Story Section with Card */}
                     <div
                         className="rounded-2xl p-8 mb-16 shadow-sm"
                         style={{ backgroundColor: "#F2F5FA" }}
@@ -98,7 +96,6 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* Features Grid */}
                     <h2
                         className="text-2xl font-semibold text-center mb-8"
                         style={{ color: "#1A2A36" }}
@@ -129,7 +126,6 @@ const About = () => {
                         ))}
                     </div>
 
-                    {/* Values Section with Brand Colors */}
                     <div className="grid md:grid-cols-2 gap-8 mb-16">
                         <div
                             className="rounded-2xl p-6 shadow-sm"
@@ -173,7 +169,6 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* Call to Action */}
                     <div
                         className="rounded-2xl p-8 text-center shadow-sm"
                         style={{ backgroundColor: "#3A6B7C" }}

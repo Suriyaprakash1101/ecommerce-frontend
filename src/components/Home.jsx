@@ -7,10 +7,12 @@ import { useApp } from "./AppContext";
 import { RiArrowRightLine } from '@remixicon/react'
 import Product from "./Product";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     const context = useApp();
     const colorPalette = context.colorPalette
+    const navigate = useNavigate();
 
     return (
         <div className="" >
@@ -42,7 +44,7 @@ const Home = () => {
                                 <p>Discover a curated collection of ocean-inspired essential <span>designed to bring the ethereal beauty of the sea into your everyday life.</span></p>
                             </div>
                             <div className="">
-                                <button className="p-2 text-white rounded-4xl flex flex-row gap-1.5 mt-4" style={{ background: colorPalette.text.header }}>
+                                <button className="p-2 text-white rounded-4xl flex flex-row gap-1.5 mt-4" style={{ background: colorPalette.text.header }} onClick={()=> navigate("/product")}>
                                     <p>Shop the Product</p>
                                     <div> < RiArrowRightLine /></div>
 

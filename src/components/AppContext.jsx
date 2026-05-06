@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext, useState } from "react";
+import React, { Children, createContext, useContext, useEffect, useState } from "react";
 import img1 from '../assets/perfume5.jpg'
 import img2 from '../assets/perfume4.jpg'
 import img3 from '../assets/perfume3.jpg'
@@ -131,6 +131,11 @@ const AppProvider = ({ children }) => {
                 rating: 4
             },
         ];
+    useEffect(()=>{
+        if(localStorage.getItem("access_token")){
+            setIsLoggedIn(true)
+        }
+    },[])
     const value = {
         colorPalette,
         isLoggedIn,
