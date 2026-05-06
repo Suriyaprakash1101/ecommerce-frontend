@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RiGitRepositoryPrivateLine, RiMailLine, RiMapPinUserLine } from '@remixicon/react';
 import { useApp } from "./AppContext";
-import { login } from "../Api/api";
+import { getUserData, login } from "../Api/api";
 
 const Login = () => {
     const context = useApp();
     const navigate = useNavigate();
-
+    const setUserData = context.setUserData;
     const { colorPalette: color, setIsLoggedIn } = context;
 
     const [loginData, setLoginData] = useState({
@@ -51,6 +51,12 @@ const Login = () => {
                 setShowSuccessPopup(true);
                 
                 // Redirect after 2.5 seconds
+                getUserData().then((profileData)=>{
+                    setUserData(profileData)
+                   
+                })
+                
+             
                 setTimeout(() => {
                     setShowSuccessPopup(false);
                     setIsLoggedIn(true);

@@ -7,6 +7,7 @@ import img5 from '../assets/cloth1.jpg'
 import img6 from '../assets/watch1.jpg'
 import img7 from '../assets/watch2.jpg'
 import img8 from '../assets/cloth2.jpg'
+import { getUserData } from "../Api/api";
 export const AppContext = createContext();
 const AppProvider = ({ children }) => {
 
@@ -134,13 +135,19 @@ const AppProvider = ({ children }) => {
     useEffect(()=>{
         if(localStorage.getItem("access_token")){
             setIsLoggedIn(true)
+            getUserData().then((data)=>{
+                setUserData(data);
+            })
         }
     },[])
+    const[userData,setUserData]=useState({});
     const value = {
         colorPalette,
         isLoggedIn,
         setIsLoggedIn,
-        product
+        product,
+        userData,
+        setUserData
     }
     return(
         <AppContext.Provider value={value}>

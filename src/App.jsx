@@ -14,6 +14,7 @@ import SignUp from './components/SignUp'
 import Login from './components/Login'
 import AdminDashboard from './components/AdminDashboard'
 import { useAutoLogout } from './hook/useAutoLogout'
+import OrderProduct from './components/OrderProduct'
 
 function AppRoutes() {
   useAutoLogout(); 
@@ -26,6 +27,7 @@ function AppRoutes() {
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/adminDashboard' element={<AdminDashboard/>}/>
+      <Route path='/order' element={<OrderProduct/>}/>
     </Routes>
   );
 }
