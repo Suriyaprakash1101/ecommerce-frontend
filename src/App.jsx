@@ -15,32 +15,42 @@ import Login from './components/Login'
 import AdminDashboard from './components/AdminDashboard'
 import { useAutoLogout } from './hook/useAutoLogout'
 import OrderProduct from './components/OrderProduct'
+import Dashboard from './components/Dashboard'
+import AddProduct from './components/AddProduct'
+import ViewProduct from './components/ViewProduct'
+import EditUser from './components/EditUser'
 
 function AppRoutes() {
-  useAutoLogout(); 
-  
+  useAutoLogout();
+
   return (
     <Routes>
-      <Route path='/' element={<Home/>} />
-      <Route path='/product' element={<ShowProduct/>}/>
-      <Route path='/about' element={<About/>}/>
-      <Route path='/signup' element={<SignUp/>}/>
-      <Route path='/login' element={<Login/>}/>
-      <Route path='/adminDashboard' element={<AdminDashboard/>}/>
-      <Route path='/order' element={<OrderProduct/>}/>
+      <Route path='/' element={<Home />} />
+      <Route path='/product' element={<ShowProduct />} />
+      <Route path='/about' element={<About />} />
+      <Route path='/signup' element={<SignUp />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/adminDashboard' element={<AdminDashboard />} />
+      <Route path='/order' element={<OrderProduct />} />
+      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/addNewProduct' element={<AddProduct />} />
+      <Route path='/viewProduct' element={<ViewProduct />} />
+      <Route path='/editProfile' element={<EditUser/>}/>
     </Routes>
   );
 }
 
 function App() {
   return (
-    <AppProvider>
-      <div className=''>
-        <BrowserRouter>
-          <AppRoutes /> 
-        </BrowserRouter>
-      </div>
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <div className=''>
+
+          <AppRoutes />
+
+        </div>
+      </AppProvider>
+    </BrowserRouter>
   )
 }
 

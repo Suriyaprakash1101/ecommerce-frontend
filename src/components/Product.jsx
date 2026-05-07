@@ -23,6 +23,8 @@ const Product = () => {
     const context = useApp();
     const colorPalette = context.colorPalette;
     const itemsPerPage = 12;
+  
+
 
     
     const fetchCategories = async () => {

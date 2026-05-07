@@ -1,10 +1,11 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 const About = () => {
-    
-    const features = [
+    const navigation = useNavigate()
+;    const features = [
         {
             title: "Curated Collection",
             description: "Hand-picked products that blend quality with style, updated weekly to keep you ahead of trends.",
@@ -188,6 +189,7 @@ const About = () => {
                         <button
                             className="px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:opacity-90 shadow-md"
                             style={{ backgroundColor: "#6BD3E0", color: "#1A2A36" }}
+                            onClick={()=>navigation('/product')}
                         >
                             Start Shopping
                         </button>

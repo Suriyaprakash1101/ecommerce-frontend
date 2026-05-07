@@ -12,11 +12,27 @@ export const getAuthToken = () => {
 const apiClient = axios.create({
     baseURL: api_url,
 });
+const isTokenExpired = (token) => {
+  if (!token) return true;
+  
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const currentTime = Math.floor(Date.now() / 1000);
+    return payload.exp < currentTime;
+  } catch (error) {
+    return true;
+  }
+};
 
 apiClient.interceptors.request.use(
     (config) => {
         const token = getAuthToken();
         if (token) {
+            if (isTokenExpired(token)) {
+                const context = useApp();
+                context.logout();
+                return Promise.reject(new Error('Token expired'));
+            }
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
@@ -136,7 +152,7 @@ export const enrichProductsWithCategoryNames = (products, categories) => {
 export const getAllProducts = async (params = {}) => {
     try {
         const queryParams = new URLSearchParams();
-        
+
         if (params.skip !== undefined) queryParams.append('skip', params.skip);
         if (params.limit !== undefined) queryParams.append('limit', params.limit);
         if (params.search) queryParams.append('search', params.search);
@@ -144,7 +160,7 @@ export const getAllProducts = async (params = {}) => {
         if (params.min_price) queryParams.append('min_price', params.min_price);
         if (params.max_price) queryParams.append('max_price', params.max_price);
         if (params.in_stock !== undefined) queryParams.append('in_stock', params.in_stock);
-        
+
         const url = `/products/?${queryParams.toString()}`;
         const response = await apiClient.get(url);
         return response;

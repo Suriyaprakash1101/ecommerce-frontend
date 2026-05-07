@@ -1,11 +1,18 @@
+
+
+
+
 import React, { useState, useEffect } from "react";
 import { useApp } from "./AppContext";
 import { getAllCategories, createProduct } from "../Api/productApi";
 import { getAuthToken } from "../Api/productApi";
+import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
     const context = useApp();
     const color = context.colorPalette;
+    const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
         productName: "",
@@ -141,8 +148,9 @@ const AddProduct = () => {
 
     if (!isAuthenticated) {
         return (
-            <div className="bg-white p-3 rounded-lg">
-                <div className="text-center py-8">
+            <div>
+                <Header />
+                <div className="p-6 text-center">
                     <p className="text-red-500 mb-4">Please login to add products</p>
                     <a 
                         href="/login" 
@@ -156,107 +164,139 @@ const AddProduct = () => {
     }
 
     return (
-        <div className="bg-white p-3 rounded-lg">
-            <p className="font-semibold text-lg mb-4" style={{color: color.cta}}>
-                Add New Product
-            </p>
-            
+        <div>
+            <Header />
+            <div 
+                className="flex flex-row gap-10 p-6 min-h-screen"
+                style={{ background: color.background.primary }}
+            >
+                {/* Sidebar Panel */}
+                <div className="w-64 bg-white rounded-lg shadow-md p-4 h-fit">
+                    <div className="space-y-4">
+                        <div className="pb-4 border-b border-gray-200">
+                            <h3 className="font-semibold text-gray-700">Panel</h3>
+                        </div>
+                        <nav className="space-y-2">
+                            <div className="p-2 hover:bg-gray-50 rounded-md cursor-pointer" onClick={()=>{navigate('/dashboard')}}>
+                                Dashboard
+                            </div>
+                            <div className="p-2 bg-blue-50 text-blue-600 rounded-md cursor-pointer">
+                                Add Products
+                            </div>
+                            <div className="p-2 hover:bg-gray-50 rounded-md cursor-pointer" onClick={()=>{navigate('/viewProduct')}}>
+                                View Products
+                            </div>
+                        </nav>
+                    </div>
+                </div>
 
-            {message.text && (
-                <div className={`mb-4 p-3 rounded ${message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                    {message.text}
-                </div>
-            )}
-            
-            <div className="flex flex-row p-4">
-                <div className="flex flex-col gap-3 w-1/2 mr-8">
-                    <p className="font-semibold">Product Name <span className="text-red-500">*</span></p>
-                    <input 
-                        type="text" 
-                        name="productName"
-                        value={formData.productName}
-                        onChange={handleChange}
-                        className="border-2 border-gray-400 rounded-sm outline-0 p-2 focus:border-blue-500 transition-colors"
-                        placeholder="Enter product name"
-                    />
-                </div>
-                
-                <div className="flex flex-row gap-10">
-                    <div className="flex flex-col gap-3">
-                        <p className="font-semibold">Category <span className="text-red-500">*</span></p>
-                        <select 
-                            name="category_id"
-                            value={formData.category_id}
-                            onChange={handleChange}
-                            className="border-2 border-gray-400 rounded-sm outline-0 p-2 focus:border-blue-500 transition-colors min-w-[150px]"
-                        >
-                            <option value="">Select a category</option>
-                            {categories.map(category => (
-                                <option key={category.category_id} value={category.category_id}>
-                                    {category.category_name}
-                                </option>
-                            ))}
-                        </select>
+                {/* Main Content */}
+                <div className="flex-1">
+                    <div className="bg-white rounded-lg shadow-md p-6">
+                        <div className="mb-4 pb-3 border-b border-gray-200">
+                            <h3 className="text-xl font-semibold text-gray-800">Add New Product</h3>
+                            <p className="text-gray-500 text-sm mt-1">Fill in the details to add a new product to your inventory</p>
+                        </div>
+                        
+
+                        {message.text && (
+                            <div className={`mb-4 p-3 rounded ${message.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                {message.text}
+                            </div>
+                        )}
+                        
+                        <div className="flex flex-row p-4">
+                            <div className="flex flex-col gap-3 w-1/2 mr-8">
+                                <p className="font-semibold">Product Name <span className="text-red-500">*</span></p>
+                                <input 
+                                    type="text" 
+                                    name="productName"
+                                    value={formData.productName}
+                                    onChange={handleChange}
+                                    className="border-2 border-gray-400 rounded-sm outline-0 p-2 focus:border-blue-500 transition-colors"
+                                    placeholder="Enter product name"
+                                />
+                            </div>
+                            
+                            <div className="flex flex-row gap-10">
+                                <div className="flex flex-col gap-3">
+                                    <p className="font-semibold">Category <span className="text-red-500">*</span></p>
+                                    <select 
+                                        name="category_id"
+                                        value={formData.category_id}
+                                        onChange={handleChange}
+                                        className="border-2 border-gray-400 rounded-sm outline-0 p-2 focus:border-blue-500 transition-colors min-w-[150px]"
+                                    >
+                                        <option value="">Select a category</option>
+                                        {categories.map(category => (
+                                            <option key={category.category_id} value={category.category_id}>
+                                                {category.category_name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                
+                                <div className="flex flex-col gap-3">
+                                    <p className="font-semibold">Price ($) <span className="text-red-500">*</span></p>
+                                    <input 
+                                        type="number" 
+                                        name="price"
+                                        value={formData.price}
+                                        onChange={handleChange}
+                                        className="border-2 border-gray-400 rounded-sm outline-0 p-2 focus:border-blue-500 transition-colors"
+                                        placeholder="0.00"
+                                        step="0.01"
+                                        min="0"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="flex flex-row justify-between p-4">
+                            <div className="flex-1 mr-4">
+                                <p className="font-semibold">Description</p>
+                                <textarea 
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleChange}
+                                    className="border-2 border-gray-400 outline-0 w-full h-24 p-2 rounded-lg focus:border-blue-500 transition-colors"
+                                    placeholder="Product description (optional)..."
+                                />
+                            </div>
+                            
+                            <div>
+                                <p className="font-semibold">Quantity <span className="text-red-500">*</span></p>
+                                <input 
+                                    type="number" 
+                                    name="quantity"
+                                    value={formData.quantity}
+                                    onChange={handleChange}
+                                    className="border-2 border-gray-400 outline-0 rounded-sm p-2 w-24 focus:border-blue-500 transition-colors"
+                                    placeholder="0"
+                                    min="0"
+                                />
+                            </div>
+                        </div>
+                        
+                        <div className="flex flex-row-reverse gap-8 p-4">
+                            <button 
+                                onClick={handleReset}
+                                disabled={loading}
+                                className="border-2 border-gray-400 rounded-lg pt-1 pb-1 pl-2 pr-2 font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50"
+                            >
+                                Reset
+                            </button>
+                            <button 
+                                onClick={handleSubmit}
+                                disabled={loading}
+                                className="rounded-lg pt-1 pb-1 pl-2 pr-2 font-semibold transition-opacity hover:opacity-90 disabled:opacity-50"
+                                style={{background: color.cta, color: color.text.primary}}
+                            >
+                                {loading ? 'Adding...' : 'Add Product'}
+                            </button>
+                        </div>
                     </div>
-                    
-                    <div className="flex flex-col gap-3">
-                        <p className="font-semibold">Price ($) <span className="text-red-500">*</span></p>
-                        <input 
-                            type="number" 
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}
-                            className="border-2 border-gray-400 rounded-sm outline-0 p-2 focus:border-blue-500 transition-colors"
-                            placeholder="0.00"
-                            step="0.01"
-                            min="0"
-                        />
-                    </div>
                 </div>
-            </div>
-            
-            <div className="flex flex-row justify-between p-4">
-                <div className="flex-1 mr-4">
-                    <p className="font-semibold">Description</p>
-                    <textarea 
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        className="border-2 border-gray-400 outline-0 w-full h-24 p-2 rounded-lg focus:border-blue-500 transition-colors"
-                        placeholder="Product description (optional)..."
-                    />
-                </div>
-                
-                <div>
-                    <p className="font-semibold">Quantity <span className="text-red-500">*</span></p>
-                    <input 
-                        type="number" 
-                        name="quantity"
-                        value={formData.quantity}
-                        onChange={handleChange}
-                        className="border-2 border-gray-400 outline-0 rounded-sm p-2 w-24 focus:border-blue-500 transition-colors"
-                        placeholder="0"
-                        min="0"
-                    />
-                </div>
-            </div>
-            
-            <div className="flex flex-row-reverse gap-8 p-4">
-                <button 
-                    onClick={handleReset}
-                    disabled={loading}
-                    className="border-2 border-gray-400 rounded-lg pt-1 pb-1 pl-2 pr-2 font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50"
-                >
-                    Reset
-                </button>
-                <button 
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    className="rounded-lg pt-1 pb-1 pl-2 pr-2 font-semibold transition-opacity hover:opacity-90 disabled:opacity-50"
-                    style={{background: color.cta, color: color.text.primary}}
-                >
-                    {loading ? 'Adding...' : 'Add Product'}
-                </button>
             </div>
         </div>
     );
