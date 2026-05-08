@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import AppContext from './components/AppContext'
+import AppContext, { useApp } from './components/AppContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
@@ -19,9 +19,11 @@ import Dashboard from './components/Dashboard'
 import AddProduct from './components/AddProduct'
 import ViewProduct from './components/ViewProduct'
 import EditUser from './components/EditUser'
-
+import { useTokenRefresh } from './hook/useTokenRefresh'
 function AppRoutes() {
   useAutoLogout();
+  const { isLoggedIn } = useApp();
+     useTokenRefresh(isLoggedIn, 29);
 
   return (
     <Routes>
@@ -41,6 +43,7 @@ function AppRoutes() {
 }
 
 function App() {
+  
   return (
     <BrowserRouter>
       <AppProvider>

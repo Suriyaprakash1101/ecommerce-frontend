@@ -40,13 +40,13 @@ const Login = () => {
 
         try {
             const response = await login(loginData);
-            
+            console.log("Login response",response)
             if (response.status === 200 && response.data?.access_token) {
                 
                 localStorage.setItem('access_token', response.data.access_token);
                 localStorage.setItem('token_type', response.data.token_type);
                 localStorage.setItem('user_email', loginData.email);
-
+                localStorage.setItem('refresh_token',response.data.refresh_token)
                 // Show success popup instead of direct navigation
                 setShowSuccessPopup(true);
                 
@@ -76,6 +76,9 @@ const Login = () => {
     };
 
     // Success Popup Component
+    
+
+    
     const SuccessPopup = () => {
         // Get user email for personalized message
         const userEmail = loginData.email;

@@ -10,7 +10,7 @@ export const useAutoLogout = () => {
   const logout = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    
+    localStorage.removeItem("user_email")
     // navigate('/login', { replace: true });
   };
   

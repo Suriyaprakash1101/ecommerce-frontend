@@ -68,6 +68,7 @@ const AppProvider = ({ children }) => {
         localStorage.removeItem("access_token");
         localStorage.removeItem('token_type');
         localStorage.removeItem('user_email');
+        localStorage.removeItem('refresh_token');
         setUserData({})
         setIsLoggedIn(false)
         
